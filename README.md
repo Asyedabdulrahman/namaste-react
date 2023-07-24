@@ -21,3 +21,5 @@
 ## 📚 [_Episode 10 - Jo dikhta hai, vo bikta hai_](./Episode%2010%20-%20Jo%20dikhta%20hai,%20vo%20bikta%20hai/)
 
 ## 📚 [_Episode 11 - Data is the new oil_](./Episode%2011%20-%20Data%20is%20the%20new%20oil/)
+
+## 📚 [_Episode 12 - Let's Build Our Store_](./Episode%2012%20-%20Let's%20Build%20Our%20Store/)
