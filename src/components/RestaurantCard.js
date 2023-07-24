@@ -18,7 +18,7 @@ const RestaurantCard = (props) => {
   } = resData?.data;
 
   return (
-    <div className="m-4 p-4 w-[250px] bg-gray-100 rounded-lg hover:bg-gray-200 transition-all ">
+    <div className="m-4 p-4 w-[250px] bg-gray-100 rounded-lg hover:shadow-md hover:bg-gray-200 transition-all ">
       <div>
         <img
           className="w-[250px] h-[150px] rounded-lg"
@@ -28,7 +28,7 @@ const RestaurantCard = (props) => {
       </div>
 
       <div>
-        <h3 className="font-bold py-4 text-lg">{name}</h3>
+        <h3 className="py-4 text-lg font-bold">{name}</h3>
         <hr />
         <em>{cuisines.join(', ')}</em>
         <h4 className="avg-rating">
@@ -61,7 +61,7 @@ export const withPromotedLabel = (RestaurantCard) => {
   return (props) => {
     return (
       <div>
-        <label className="absolute bg-black text-white m-2 p-2 rounded-lg">
+        <label className="absolute p-2 mb-6 ml-4 text-white bg-black rounded-lg">
           Promoted
         </label>
         <RestaurantCard {...props} />

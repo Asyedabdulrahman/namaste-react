@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
 import RestaurantCard, { withPromotedLabel } from './RestaurantCard';
-import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import UserContext from '../utils/UserContext';
+import Loader from './Loader';
 
 const Body = () => {
   // * React Hook -> A normal JavaScript function which is given to us by React (or) Normal JS utility functions
@@ -17,9 +17,6 @@ const Body = () => {
   const [searchText, setSearchText] = useState('');
 
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
-
-  // * Whenever a state variable updates or changes, react triggers a reconciliation cycle(re-renders the component)
-  console.log('Body Rendered', listOfRestaurants);
 
   useEffect(() => {
     fetchData();
@@ -51,26 +48,26 @@ const Body = () => {
   const { loggedInUser, setUserName } = useContext(UserContext);
 
   return listOfRestaurants.length === 0 ? (
-    <Shimmer />
+    <Loader />
   ) : (
     <div className="body">
       {/* <div className="search-container">
         <input type="text" placeholder="Search Food or Restaurant" />
         <button>Search</button>
       </div> */}
-      <div className="filter flex">
-        <div className="search m-4 p-4">
+      <div className="flex justify-between">
+        <div className="p-4 m-4 search">
           <input
             type="text"
             placeholder="Search a restaurant you want..."
-            className="searchBox border border-solid border-black"
+            className="px-4 py-2 border border-transparent shadow-md font-medium bg-gray-100 rounded-md focus:border-0 focus:outline-0 w-[300px] placeholder:font-medium focus:border-b-2 focus:border-green-500"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
+            className="px-4 py-2 m-4 bg-green-100 rounded-lg shadow-md hover:bg-green-300 duration-[.3s] font-medium"
             onClick={() => {
               // * Filter the restaurant cards and update the UI
               // * searchText
@@ -86,9 +83,9 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="search m-4 p-4 flex items-center">
+        <div className="flex items-center p-4 m-4 search">
           <button
-            className="px-4 py-2 bg-gray-100 m-4 rounded-lg"
+            className="px-4 py-2 m-4 bg-gray-100 shadow-md hover:bg-gray-200 duration-[.3s] rounded-lg font-medium"
             onClick={() => {
               // * Filter logic
               const filteredList = listOfRestaurants.filter(
@@ -102,17 +99,19 @@ const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
-        <div className="search m-4 p-4 flex items-center">
-          <label htmlFor="name">User Name: </label>
+        <div className="flex items-center p-4 m-4 search">
+          <label htmlFor="name" className="font-medium">
+            User Name:{' '}
+          </label>
           <input
             id="name"
-            className="border border-black p-2"
+            className="px-4 py-2 border border-transparent shadow-md bg-gray-100 rounded-md focus:border-0 focus:outline-0 w-[200px] ml-[20px] focus:border-b-2 focus:border-green-500"
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
           />
         </div>
       </div>
-      <div className="flex justify-center flex-wrap">
+      <div className="flex flex-wrap justify-center">
         {/* // * looping through the <RestaurentCard /> components Using Array.map() method */}
 
         {filteredRestaurant.map((restaurant) => (

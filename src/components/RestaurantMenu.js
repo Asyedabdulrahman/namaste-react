@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-// import Shimmer from './Shimmer';
+import { Link, useParams } from 'react-router-dom';
 import useRestaurantMenu from '../utils/useRestaurantMenu';
-import ShimmerMenu from './ShimmerMenu';
 import RestaurantCategory from './RestaurantCategory';
+import Loader from './Loader';
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -14,7 +13,7 @@ const RestaurantMenu = () => {
 
   const [showIndex, setShowIndex] = useState(null);
 
-  if (resInfo === null) return <ShimmerMenu />;
+  if (resInfo === null) return <Loader />;
 
   const {
     name,
@@ -39,10 +38,20 @@ const RestaurantMenu = () => {
 
   return (
     <div className="text-center">
-      <h1 className="font-bold my-6 text-2xl">{name}</h1>
-      <p className="font-bold text-lg">
+      <h1 className="my-6 text-2xl font-bold">{name}</h1>
+      <p className="text-lg font-bold">
         {cuisines.join(', ')} - {costForTwoMessage}
       </p>
+
+      <div className="text-left">
+        <Link
+          to="/"
+          className="px-4 py-2 ml-40 font-bold duration-[0.3s] bg-green-400 rounded-md hover:bg-green-500"
+        >
+          &larr; Back
+        </Link>
+      </div>
+
       {/* categories accordions */}
       {categories.map((category, index) => (
         // Controlled Component
