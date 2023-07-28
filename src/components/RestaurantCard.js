@@ -15,7 +15,7 @@ const RestaurantCard = (props) => {
     avgRating,
     costForTwo,
     deliveryTime,
-  } = resData?.data;
+  } = resData;
 
   return (
     <div className="m-4 p-4 w-[250px] bg-gray-100 rounded-lg hover:shadow-md hover:bg-gray-200 transition-all ">
@@ -27,22 +27,22 @@ const RestaurantCard = (props) => {
         />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-2">
         <h3 className="py-4 text-lg font-bold">{name}</h3>
         <hr />
         <em>{cuisines.join(', ')}</em>
-        <h4 className="avg-rating">
+        <h4 className="flex items-center gap-2">
           <span className="icons">
             <AiOutlineStar />
           </span>
           <span>{avgRating} stars</span>
         </h4>
-        <h4 className="item-price">
-          <span style={{ marginLeft: '4px' }}>₹</span>
-          <span>{costForTwo / 100} FOR TWO</span>
+        <h4 className="flex items-center gap-2">
+          {/* <span style={{ marginLeft: '4px' }}>₹</span> */}
+          <span>{costForTwo}</span>
         </h4>
-        <h4 className="time">
-          <span className="icons">
+        <h4 className="flex items-center gap-2">
+          <span>
             <FiClock />
           </span>
           <span>{deliveryTime} minutes</span>

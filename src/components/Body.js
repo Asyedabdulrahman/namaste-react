@@ -31,9 +31,17 @@ const Body = () => {
 
     // console.log(json);
     // * optional chaining
-    // setListOfRestaurants(json.data.cards[2].data.data.cards);
-    setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+    // setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    // setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+
+    // * API changed - New API
+    setListOfRestaurants(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+
+    setFilteredRestaurant(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   const onlineStatus = useOnlineStatus();
@@ -57,31 +65,33 @@ const Body = () => {
       </div> */}
       <div className="flex justify-between">
         <div className="p-4 m-4 search">
-          <input
-            type="text"
-            placeholder="Search a restaurant you want..."
-            className="px-4 py-2 border border-transparent shadow-md font-medium bg-gray-100 rounded-md focus:border-0 focus:outline-0 w-[300px] placeholder:font-medium focus:border-b-2 focus:border-green-500"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          <button
-            className="px-4 py-2 m-4 bg-green-100 rounded-lg shadow-md hover:bg-green-300 duration-[.3s] font-medium"
-            onClick={() => {
-              // * Filter the restaurant cards and update the UI
-              // * searchText
-              console.log(searchText);
+          <form onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              placeholder="Search a restaurant you want..."
+              className="px-4 py-2 border border-transparent shadow-md font-medium bg-gray-100 rounded-md focus:border-0 focus:outline-0 w-[300px] placeholder:font-medium focus:border-b-2 focus:border-green-500"
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
+            />
+            <button
+              className="px-4 py-2 m-4 bg-green-100 rounded-lg shadow-md hover:bg-green-300 duration-[.3s] font-medium"
+              onClick={() => {
+                // * Filter the restaurant cards and update the UI
+                // * searchText
+                // console.log(searchText);
 
-              const filteredRestaurant = listOfRestaurants.filter((res) =>
-                res.data.name.toLowerCase().includes(searchText.toLowerCase())
-              );
+                const filteredRestaurant = listOfRestaurants.filter((res) =>
+                  res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                );
 
-              setFilteredRestaurant(filteredRestaurant);
-            }}
-          >
-            Search
-          </button>
+                setFilteredRestaurant(filteredRestaurant);
+              }}
+            >
+              Search
+            </button>
+          </form>
         </div>
         <div className="flex items-center p-4 m-4 search">
           <button
@@ -89,7 +99,7 @@ const Body = () => {
             onClick={() => {
               // * Filter logic
               const filteredList = listOfRestaurants.filter(
-                (res) => parseFloat(res.data.avgRating) > 4
+                (res) => parseFloat(res.info.avgRating) > 4
               );
 
               setFilteredRestaurant(filteredList);
@@ -101,7 +111,7 @@ const Body = () => {
         </div>
         <div className="flex items-center p-4 m-4 search">
           <label htmlFor="name" className="font-medium">
-            User Name:{' '}
+            User Name:
           </label>
           <input
             id="name"
@@ -116,17 +126,13 @@ const Body = () => {
 
         {filteredRestaurant.map((restaurant) => (
           <Link
-            style={{
-              textDecoration: 'none',
-              color: '#000',
-            }}
-            key={restaurant.data.id}
-            to={'/restaurants/' + restaurant.data.id}
+            key={restaurant?.info.id}
+            to={'/restaurants/' + restaurant?.info.id}
           >
-            {restaurant.data.promoted ? (
-              <RestaurantCardPromoted resData={restaurant} />
+            {restaurant?.info.promoted ? (
+              <RestaurantCardPromoted resData={restaurant?.info} />
             ) : (
-              <RestaurantCard resData={restaurant} />
+              <RestaurantCard resData={restaurant?.info} />
             )}
           </Link>
         ))}
