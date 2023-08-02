@@ -23,3 +23,5 @@
 ## 📚 [_Episode 11 - Data is the new oil_](./Episode%2011%20-%20Data%20is%20the%20new%20oil/)
 
 ## 📚 [_Episode 12 - Let's Build Our Store_](./Episode%2012%20-%20Let's%20Build%20Our%20Store/)
+
+## 📚 [_Episode 13 - Time for the Test_](/Episode%2013%20-%20Time%20for%20the%20Test/)
