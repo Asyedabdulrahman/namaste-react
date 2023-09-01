@@ -2,6 +2,8 @@ import React, { lazy, Suspense } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Header from './components/Header';
 import Body from './components/Body';
@@ -38,6 +40,7 @@ const AppLayout = () => {
           <Outlet />
         </div>
       </UserContext.Provider>
+      <ToastContainer />
     </Provider>
   );
 };

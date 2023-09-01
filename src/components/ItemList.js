@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { addItem } from '../utils/cartSlice';
 import { CDN_URL } from '../utils/constants';
+import { toast } from 'react-toastify';
 
 const ItemList = ({ items }) => {
   const dispatch = useDispatch();
@@ -8,6 +9,7 @@ const ItemList = ({ items }) => {
   const handleAddItem = (item) => {
     // dispatch an action
     dispatch(addItem(item));
+    toast.success('Item added to the cart');
   };
 
   return (
